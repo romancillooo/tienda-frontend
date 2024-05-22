@@ -1,0 +1,27 @@
+.mobile-carousel {
+  display: flex;
+  justify-content: center;
+  background-color: var(--colorSecundario);
+
+    ngb-carousel {
+      width: 90%;
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0;
+      margin-right: 0;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
+

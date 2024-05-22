@@ -1,0 +1,47 @@
+<div class="cart-sidebar" [class.open]="isOpen">
+  <button class="close-btn" (click)="closeCart()">
+    <i class="fas fa-times fa-2x"></i>
+  </button>
+
+  <div class="cart-header">
+    <h4 class="cart-title">Cart</h4>
+  </div>
+  <div class="cart-items">
+
+    <div class="cart-item" *ngFor="let product of cartItems">
+      <div class="product-info">
+        <img
+          class="product-image"
+          [src]="product.image"
+          [alt]="product.name"
+        />
+        <div class="product-details">
+          <h5 class="item-name">{{ product.name }}</h5>
+          <p class="item-price">{{ product.price | currency }}</p>
+          <div class="quantity-controls">
+            <button class="quantity-control-btn" (click)="decreaseQuantity(product)"><i class="fa fa-minus"></i></button>
+            <span class="quantity">{{ product.quantity }}</span>
+            <button class="quantity-control-btn" (click)="increaseQuantity(product)"><i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+        <button class="remove-item-btn" (click)="deleteProduct(product.id)">
+          <i class="fas fa-trash"></i>
+
+        </button>
+      </div>
+
+
+    </div>
+
+  </div>
+  <div class="cart-summary">
+    <p class="total-text">Total: <span class="total-price">{{ cartTotal | currency }}</span></p>
+    <div class="cart-btns">
+      <button class="checkout-btn">Go to Checkout</button>
+      <button class="clear-cart-btn" (click)="clearCart()">Clear Cart</button>
+    </div>
+
+
+  </div>
+</div>
+<div class="overlay" *ngIf="isOpen" (click)="closeCart()"></div>

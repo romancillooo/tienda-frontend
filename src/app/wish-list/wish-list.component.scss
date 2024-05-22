@@ -1,0 +1,47 @@
+.contenedor-wishlist {
+  font-family: var(--fuentePrincipal);
+}
+
+.products-container {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 50px 50px;
+}
+
+.card {
+  position: relative;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  i {
+    color: black;
+  }
+
+  &:hover i {
+    color: red;
+  }
+
+}
+
+.card:hover .delete-icon {
+  opacity: 1;
+}
+
+.btn-ver-producto {
+  background-color: var(--colorPrimario);
+  color: white;
+}

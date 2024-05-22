@@ -1,0 +1,84 @@
+.contenedor {
+  font-family: var(--fuentePrincipal);
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent), url('../../assets/img/login-background/login-background-store.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .contenido {
+    z-index: 1;
+
+    @media (max-width: 768px) {
+      padding: 10px;
+    }
+
+    .login-title {
+      margin-bottom: 20px;
+
+      @media (max-width: 768px) {
+        margin-bottom: 10px;
+        font-size: 25px;
+      }
+    }
+
+    .login-container {
+      width: 500px;
+      border: 1px solid var(--colorPrimario);
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+
+      @media (max-width: 768px) {
+        max-width: 320px;
+      }
+
+
+    }
+
+    .input {
+      border: 1px solid #585C64;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+
+    .btn-login {
+      background-color: var(--colorPrimario);
+      color: white;
+      width: 100%;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .branding-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 120px;
+    }
+  }
+}
+
+.credenciales {
+  color: var(--colorPrimario);
+}

@@ -1,0 +1,24 @@
+<ng-container *ngIf="showCarousel">
+  <div class="d-none d-md-block">
+    <app-carousel></app-carousel>
+  </div>
+</ng-container>
+
+<div class="contenedor-home">
+  <h2 class="text-center fw-bold products-text">New Products</h2>
+  <div class="rows-container">
+    <div class="product-container" *ngFor="let product of products.slice(0, 4)" (click)="navigateToProduct(product.id)">
+      <div class="card-container">
+        <div class="card-icons">
+        </div>
+        <img [src]="product.image" class="product-img" [alt]="product.name"/>
+        <div class="product-body">
+          <h5 class="product-brand">{{ getBrandName(product.brand_id) }}</h5>
+          <h5 class="product-name">{{ product.name }}</h5>
+          <p class="product-price">{{ product.price | currency }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

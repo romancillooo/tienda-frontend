@@ -1,0 +1,9 @@
+<ng-container *ngIf="!hideNavbarAndFooter">
+  <app-navbar></app-navbar>
+</ng-container>
+
+<router-outlet></router-outlet>
+
+<ng-container *ngIf="!hideNavbarAndFooter">
+  <app-footer></app-footer>
+</ng-container>

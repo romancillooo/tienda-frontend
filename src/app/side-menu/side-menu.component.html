@@ -1,0 +1,15 @@
+<div class="side-menu" [class.open]="isOpen">
+  <div class="btn-close-container">
+      <i class="fas fa-times fa-2x" (click)="closeSideMenu()"></i>
+  </div>
+  <ul>
+    <div class="menu-item">
+      <li><a routerLink="/" (click)="closeSideMenu()">Home</a></li>
+      <li><a href="#">Brands</a></li>
+      <li><a href="#">Categories</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a routerLink="/login" (click)="closeSideMenu()">Login</a></li>
+    </div>
+  </ul>
+</div>
+<div class="overlay" *ngIf="isOpen" (click)="closeSideMenu()"></div>

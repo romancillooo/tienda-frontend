@@ -1,0 +1,7 @@
+<div class="mobile-carousel">
+  <ngb-carousel *ngIf="images">
+    <ng-template ngbSlide *ngFor="let image of images">
+      <img [src]="image" alt="Slide">
+    </ng-template>
+  </ngb-carousel>
+</div>

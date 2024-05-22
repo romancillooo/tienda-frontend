@@ -1,0 +1,24 @@
+<div class="contenedor w-100">
+  <div class="background-image"></div>
+  <div class="contenido">
+    <div class="branding-logo">
+      <img src="../../assets/img/logos/logo3.png" alt="Logo del Branding">
+    </div>
+    <h2 class="login-title mt-4 mb-4 text-center fw-bold">Inicia Sesión</h2>
+    <div class="login-container">
+      <div class="credenciales-container">
+        <div class="credenciales">
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control input" id="inputEmail" placeholder="Ingresa tu correo electrónico" [(ngModel)]="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="inputPassword" class="form-label">Contraseña</label>
+            <input type="password" class="form-control input" id="inputPassword" placeholder="Ingresa tu contraseña" [(ngModel)]="password" name="password" required>
+          </div>
+          <button routerLink="/" type="submit" class="btn btn-login">Iniciar Sesión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

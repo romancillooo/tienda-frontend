@@ -1,0 +1,21 @@
+<div class="contenedor-wishlist">
+  <h2 class="mt-4 mb-4 text-center fw-bold">Wishlist</h2>
+  <div class="row products-container">
+    <div
+      class="col-6 col-md-4 col-lg-3 mb-3 card-container"
+      *ngFor="let product of wishlistProducts; let i = index"
+    >
+      <div class="card card-mobile-small mx-1 mx-sm-2 my-1">
+        <div class="delete-icon" (click)="removeFromWishlist(product)">
+          <i class="fas fa-trash-alt"></i>
+        </div>
+        <img [src]="product.image" class="card-img-top" [alt]="product.name" />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.price | currency }}</p>
+          <button class="btn btn-ver-producto">Ver Producto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

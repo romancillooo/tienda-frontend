@@ -1,0 +1,16 @@
+.footer {
+  font-family: var(--fuentePrincipal);
+  background-color: var(--colorPrimario);
+
+  ul {
+    padding-left: 0;
+  }
+
+  a {
+    color: inherit;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
