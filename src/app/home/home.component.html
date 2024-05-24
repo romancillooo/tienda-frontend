@@ -1,24 +1,55 @@
-<ng-container *ngIf="showCarousel">
-  <div class="d-none d-md-block">
-    <app-carousel></app-carousel>
+<body>
+  <header class="home">
+    <!-- Contenido del header aquí -->
+  </header>
+  <div class="image-container-main1">
+    <img src="assets/img/palm-angels-banner.jpg" alt="Descripción de la imagen">
+    <p class="text-image">Palm Angels</p>
+    <button class="image-button">VER MÁS</button>
   </div>
-</ng-container>
-
-<div class="contenedor-home">
-  <h2 class="text-center fw-bold products-text">New Products</h2>
-  <div class="rows-container">
-    <div class="product-container" *ngFor="let product of products.slice(0, 4)" (click)="navigateToProduct(product.id)">
-      <div class="card-container">
-        <div class="card-icons">
+  <div class="container">
+    <div class="main-image">
+      <img src="assets/img/palm-angels-logo-hoodie_22030545_52306842_800.jpg" alt="Imagen principal">
+    </div>
+    <div class="product-grid">
+      <div class="product" *ngFor="let product of products" (click)="navigateToProduct(product.id)">
+        <div class="image-container">
+          <img [src]="product.images[0]" alt="Producto" class="principal-image">
+          <img [src]="product.images[1]" alt="Producto" class="hover-image">
         </div>
-        <img [src]="product.image" class="product-img" [alt]="product.name"/>
-        <div class="product-body">
-          <h5 class="product-brand">{{ getBrandName(product.brand_id) }}</h5>
-          <h5 class="product-name">{{ product.name }}</h5>
-          <p class="product-price">{{ product.price | currency }}</p>
-        </div>
+        <p>{{ product.name }}</p>
+        <p class="price">${{ product.price | number }}</p>
       </div>
     </div>
   </div>
-</div>
-
+  <!-- Repite la estructura anterior para otras secciones y productos -->
+  <div class="info-banner">
+    <div class="info-item">
+      <div class="icon-info">
+        <fa-icon [icon]="faCreditCard"></fa-icon>
+      </div>
+      <div class="info-text">
+        <h3>ACEPTAMOS</h3>
+        <p>PAGOS CON TARJETA, TRANSFERENCIA ELECTRONICA Y DEPOSITOS BANCARIOS.</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="icon-info2">
+        <fa-icon [icon]="faDollarSign"></fa-icon>
+      </div>
+      <div class="info-text">
+        <h3>¿NO TIENES TARJETA?</h3>
+        <p>ACEPTAMOS PAGOS EN EFECTIVOS Y DEPOSITOS BANCARIOS.</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="icon-info">
+        <fa-icon [icon]="faTruckFast"></fa-icon>
+      </div>
+      <div class="info-text">
+        <h3>ENVIOS A TODO MÉXICO</h3>
+        <p>Regular (3-5 días) $199</p>
+      </div>
+    </div>
+  </div>
+</body>
