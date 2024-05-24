@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { BrandsService } from '../services/brands.service';
 import { Router } from '@angular/router';
+import { faCreditCard, faDollarSign, faTruckFast } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-home',
@@ -40,6 +42,10 @@ getBrandName(brandId: number): string {
   const brand = this.brandsService.getBrandById(brandId);
   return brand ? brand.name : '';
 }
+
+faCreditCard = faCreditCard;
+  faDollarSign = faDollarSign;
+  faTruckFast = faTruckFast;
 
 
 }

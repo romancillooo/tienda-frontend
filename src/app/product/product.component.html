@@ -1,57 +1,68 @@
-<div class="general-container">
-  <div class="principal-container">
-    <div class="main-image-container">
-      <div class="main-image">
-        <img [src]="selectedImage" class="principal-image" alt="Product Image" />
-        <div class="thumbnails">
-          <div *ngFor="let productImage of productImages" class="thumbnail" (click)="selectImage(productImage)" [ngClass]="{ selected: productImage === selectedImage }">
-          <img [src]="productImage" alt="Product Thumbnail" />
-        </div>
-        </div>
+<div class="product-container" *ngIf="product">
+  <!-- Imágenes del Producto -->
+  <div class="product-images-sidebar">
+    <div class="thumbnail" *ngFor="let image of productImages" (click)="selectImage(image)">
+      <img [src]="image" [class.selected]="image === selectedImage" alt="{{ product.name }}">
+    </div>
+  </div>
+
+  <!-- Imagen Seleccionada -->
+  <div class="product-image-main">
+    <img [src]="selectedImage" alt="{{ product.name }}">
+  </div>
+
+  <!-- Información del Producto -->
+  <div class="product-info">
+    <h1>{{ product.name }}</h1>
+    <p class="price">${{ product.price | number }}</p>
+    <p class="description">{{ product.description }}</p>
+
+    <!-- Opciones de Color -->
+    <div class="color-options">
+      <h3>Colour: {{ selectedColor }}</h3>
+      <div class="colors">
+        <span 
+          *ngFor="let color of product.availableColors"
+          [class.selected]="color === selectedColor"
+          [style.background-color]="color"
+          (click)="selectColor(color)">
+        </span>
       </div>
     </div>
-    <div class="product-details-container">
-      <div class="product-details">
-        <div class="brand-name">
-          <p>{{ brand.name }}</p>
-        </div>
-        <div class="product-name">
-          <h2>{{ product.name }}</h2>
-        </div>
-        <div class="category">
-          <p>{{ category.name }}</p>
-        </div>
-        <div class="price">
-          <h3>{{ product.price | currency }}</h3>
-        </div>
-        <div class="iva-container">
-          <p>incl. VAT excl. <a href="">shipping costs.</a></p>
-        </div>
-        <div class="colors">
-          <h4>Color: </h4>
-          <p> {{ selectedColorName }}</p>
-        </div>
-        <div *ngFor="let color of colors" class="color" (click)="selectColor(color.id)">
-          <span class="color-box" [style.background-color]="color.hex_code" [ngClass]="{'selected': color.id === selectedColorId}"></span>
-        </div>
+
+    <!-- Opciones de Talla -->
+    <div class="size-options">
+      <h3>Size (Palm Angels Standard)</h3>
+      <div class="sizes">
+        <span 
+          *ngFor="let size of product.availableSizes"
+          [class.selected]="size === selectedSize"
+          (click)="selectSize(size)">
+          {{ size }}
+        </span>
       </div>
+    </div>
 
-      <div class="btns-container">
-        <div class="btn-cart-container">
-          <button class="btn-cart" (click)="addToCart()">
-            <i class="fas fa-shopping-cart"></i> Add to Cart
-          </button>
-        </div>
+    <!-- Botones de Acción -->
+    <div class="action-buttons">
+      <button class="add-to-bag" (click)="addToCart()">Add to Bag</button>
+      <button class="add-to-wishlist" (click)="addToWishlist()">{{ addToWishlistText }}</button>
+    </div>
 
-        <div class="btn-like-container">
-          <button class="btn-like" (click)="addToWishlist()">
-            <i class="fas fa-heart" [ngClass]="{'liked': isInWishlist}"></i> {{ addToWishlistText }}
-          </button>
-        </div>
-
+    <!-- Tabs de Información Adicional -->
+    <div class="additional-info">
+      <div class="info-tab">
+        <h3>Description</h3>
+        <p>{{ product.fullDescription }}</p>
+      </div>
+      <div class="info-tab">
+        <h3>Shipping & Returns</h3>
+        <p>{{ product.shippingAndReturns }}</p>
+      </div>
+      <div class="info-tab">
+        <h3>Share</h3>
+        <p>Share this product with your friends!</p>
       </div>
     </div>
   </div>
 </div>
-
-

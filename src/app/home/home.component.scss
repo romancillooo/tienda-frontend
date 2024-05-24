@@ -1,118 +1,310 @@
-.contenedor-home {
-  font-family: var(--fuentePrincipal);
-  background-color: var(--colorSecundario);
-}
-
-.products-text {
-  padding: 20px 0;
+html, body {
   margin: 0;
-}
-
-.rows-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-  align-items: center;
-  margin: 0 710px;
-
-  @media (min-width: 1440px) {
-    grid-template-columns: repeat(4, 1fr);
-    margin: 0 60px;
-}
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-    margin: 0 65px;
-}
-
-  @media (max-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-      margin: 0 25px;
-  }
-
-  @media (max-width: 640px) {
-      grid-template-columns: repeat(1, 1fr);
-      margin: 0 10px;
-  }
-
-
-
-}
-
-.product-container {
-  width: 300px;
   padding: 0;
-  background-color: white;
-  border-radius: 7px;
-  margin: 0 0 20px;
+  height: 100%;
+}
+
+  .image-container {
+    position: relative;
+    width: 100%; /* Ajusta esto según el ancho deseado para la imagen */
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: auto; /* Esto mantendrá la proporción de la imagen */
+    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
+  }
+
+  .text-image {
+    position: absolute;
+    top: 5vw; /* Ajuste relativo según el tamaño de la pantalla */
+    left: 19vw; /* Ajuste relativo según el tamaño de la pantalla */
+    color: #ffffff;
+    font-size: 4vw; /* Escala la fuente basado en el ancho de la ventana */
+    text-transform: uppercase;
+  }
+  
+  
+  .image-button {
+    position: absolute;
+    top: 40%; /* Centra el botón verticalmente */
+    left: 20%; /* Centra el botón horizontalmente */
+    background-color: transparent; /* Color de fondo semitransparente */
+    border: 1px solid white; /* Borde transparente inicial */
+    color:rgb(255, 255, 255); /* Color del texto */
+    padding: 12px 25px;
+    line-height: 1;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s, border-color 0.5s; /* Suave transición para los cambios */
+    border-radius: 6px;
+  }
+  
+  .image-button:hover,
+  .image-button-content:hover {
+    background-color: #ffffff; /* Nuevo color de fondo más sólido */
+    color: rgb(78, 181, 58); /* Color del texto a blanco */
+    border-color: white; /* Borde blanco */
+  }
+
+  .container {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: 1200px; /* Ajusta esto según el ancho deseado para el contenedor */
+    margin: 0 auto;
+    padding: 0 20px;
+    padding-top: 40px;
+  }
+  
+  .main-image {
+    flex: 1; /* Ocupa 1 fracción del espacio disponible */
+    width: 50%; /* Ajusta esto según tus necesidades */
+  }
+  
+  .main-image img {
+    width: 100%;
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
+  }
+  
+  .product-grid {
+    flex: 1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .image-container-main,
+  .image-container-main1 {
+    position: relative;
+    width: 100%;
+  }
+
+  .image-container-main img {
+    width: 100%;
+    height: auto; /* Esto mantendrá la proporción de la imagen */
+    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
+    margin-top: 40px;
+  }
+
+  .image-container-main1 img {
+    width: 100%;
+    height: auto; /* Esto mantendrá la proporción de la imagen */
+    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
+  }
+
+
+  
+  .image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* Mantiene una relación de aspecto cuadrada */
+  }
+  
+  .image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mantiene la proporción de la imagen */
+    transition: opacity 0.50s ease-in-out 0s;
+  }
+  
+  .principal-image {
+    opacity: 1;
+    z-index: 1;
+  }
+  
+  .hover-image {
+    opacity: 0;
+    z-index: 2;
+  }
+  
+  .product:hover .principal-image {
+    opacity: 0;
+  }
+  
+  .product:hover .hover-image {
+    opacity: 1;
+  }
+  
+  .product p {
+    margin: 10px 0 0;
+  }
+  
+  .price {
+    font-weight: 400;
+    margin: 5px 0 0;
+  }
+  
+                                
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .main-image, .product-grid {
+      width: 100%; /* Cada sección toma el ancho completo en pantallas pequeñas */
+      height: auto; /* Permite que cada sección determine su propia altura en pantallas pequeñas */
+    }
+  }
 
   @media (max-width: 768px) {
-      width: 330px;
+    .text-image {
+      font-size: 5vw; /* Tamaño de fuente más grande para dispositivos pequeños */
+      top: 3vw; /* Posición ajustada para pantallas más pequeñas */
+      left: 20vw; /* Posición ajustada para pantallas más pequeñas */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .text-image {
+      font-size: 5vw; /* Tamaño de fuente aún mayor para pantallas muy pequeñas */
+      top: 3vw; /* Posición más baja para evitar recortes */
+      left: 20vw; /* Posición más a la izquierda para alineación adecuada */
+    }
   }
 
-
-}
-
-.card-container {
-  width: 100%;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.icon-container {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.9s ease;
-
-  i {
-    color: black;
+  .contenedor{
+    display: flex;
+    justify-content: space-between; /* Asegura que haya espacio entre los elementos */
+    align-items: center; /* Alinea los elementos verticalmente en el centro */
+    width: 100%; /* Ocupa el ancho total disponible */
+    padding-top: 40px;
+    gap: 20px;
+  }
+  
+  .product-container {
+    width: 33%; /* Da a cada contenedor de productos un tercio del ancho del contenedor padre */
+    position: relative; /* Posición relativa para posicionamiento absoluto de elementos internos */
+    overflow: hidden; /* Oculta cualquier contenido que se desborde */
+    cursor: pointer;
+  }
+  
+  .product-container img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease; /* Animación suave para el efecto de zoom */
+  }
+  
+  .product-container:hover img {
+    transform: scale(1.1); /* Aumenta el tamaño de la imagen */
   }
 
-}
-
-.icon-container.cart {
-  top: 8px;
-  right: 8px;
-}
-
-.icon-container.heart {
-  top: 53px;
-  right: 8px;
-}
-
-.card:hover .icon-container {
-  opacity: 1;
-  visibility: visible;
-}
-
-.btn-ver-producto {
-  background-color: var(--colorPrimario);
-  color: white;
-}
-
-.product-body {
-  padding: 10px 20px;
-  border-radius: 5px;
-
-  .product-brand {
+  .image-button-content {
+    position: absolute;
+    bottom: 10%; /* Ajusta esta propiedad para posicionar verticalmente */
+    left: 50%; /* Empieza en el centro horizontalmente */
+    transform: translateX(-50%);
+    background-color: transparent; /* Color de fondo semitransparente */
+    border: 1px solid white; /* Borde transparente inicial */
+    color:rgb(255, 255, 255); /* Color del texto */
+    padding: 12px 25px;
+    line-height: 1;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s, border-color 0.5s; /* Suave transición para los cambios */
+    border-radius: 6px;
     text-transform: uppercase;
-    font-weight: 700;
+  }
+  
+  .label {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    text-transform: uppercase;
+  }
+  
+
+  @media (max-width: 768px) {
+    .contenedor {
+      flex-direction: column;
+    }
+  
+    .product-container {
+      width: 100%; /* Cada contenedor ocupa el ancho completo en pantallas pequeñas */
+    }
   }
 
-  .product-price {
-    color: gray;
+  .info-banner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    background-color: #333333; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    padding: 3rem;
+    font-family: "Roboto", sans-serif; /* Fuente genérica, ajusta según la necesidad */
+    align-items: baseline;
+    margin-top: 10px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column; /* Elementos en columna */
+    justify-items: center;
+    align-items: center;
+}
+
+.info-item img {
+    width: 60px; /* Ajusta el tamaño del icono según sea necesario */
+    margin-bottom: 10px;
+}
+
+.info-text h3 {
+    font-size: 15px;
+    margin: 0;
+    text-align: center;
+}
+
+.info-text p {
+    font-size: 12px;
+    text-align: center;
+    margin: 5px 60px;
+}
+
+@media (max-width: 600px) {
+    .info-banner {
+      grid-template-columns: repeat(1, 3fr);
+        flex-direction: column;
+        text-align: center;
+    }
+    .info-item {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+  .info-banner {
+    grid-template-columns: repeat(1, 3fr);
+  }
+  .info-item {
+    margin-top: 10px;
   }
 }
 
-.product-img {
-  width: 100%;
+.icon-info {
+  width: 50px;
+  justify-items: center;
+  margin-bottom: 20px;
 }
+
+.icon-info2 {
+  width: 35px;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+

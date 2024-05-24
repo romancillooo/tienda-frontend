@@ -20,11 +20,11 @@ export class ProductComponent implements OnInit {
   category: any = {};
   addToWishlistText: string = 'Add to Wishlist';
   isInWishlist: boolean = false;
-  selectedColorId: number | null = null;
-  selectedColorName: string = '';
+  selectedColor: string = '';
+  selectedSize: string = '';
+  quantity: number = 1;
   productImages: string[] = [];
   selectedImage: string = '';
-  colors: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -45,60 +45,41 @@ export class ProductComponent implements OnInit {
   }
 
   loadProductDetails(): void {
-    this.product = this.productsService.getProductById(this.productId);
+    this.productsService.getProductById(this.productId).subscribe(product => {
+      this.product = product;
+      if (this.product) {
+        this.selectedColor = this.product.availableColors[0];
+        this.selectedSize = this.product.availableSizes[0];
+        this.productImages = this.product.images;
+        this.selectedImage = this.productImages[0];
+      }
+    });
     this.brand = this.brandsService.getBrandById(this.product.brand_id);
     this.category = this.categoriesService.getCategoryById(this.product.category_id);
     this.isInWishlist = this.wishlistService.isInWishlist(this.product);
     this.updateButtonText();
-    this.loadProductImages();
-    this.loadColors();
   }
 
-  loadProductImages(): void {
-    this.productImages = this.productColorsService.getProductImages(this.productId);
-    if (this.productImages.length > 0) {
-      this.selectedImage = this.productImages[0];
-    }
+  selectColor(color: string): void {
+    this.selectedColor = color;
   }
 
-  loadColors(): void {
-    const productColors = this.productColorsService.productColors.filter(pc => pc.product_id === this.productId);
-    const availableColorIds = productColors.map(pc => pc.color_id);
-    this.colors = this.colorsService.colors.filter(color => availableColorIds.includes(color.id));
-
-    if (this.colors.length > 0) {
-      const firstColor = this.colors[0];
-      this.selectedColorName = firstColor.name;
-      this.selectedColorId = firstColor.id;
-
-      if (this.selectedColorId !== null) {
-        this.productImages = this.productColorsService.getProductImagesByColor(this.productId, this.selectedColorId);
-
-        if (this.productImages.length > 0) {
-          this.selectedImage = this.productImages[0];
-        }
-      }
-    }
-  }
-
-
-
-  selectColor(colorId: number): void {
-    this.selectedColorId = colorId;
-    this.selectedColorName = this.getColorName(colorId);
-    this.productImages = this.productColorsService.getProductImagesByColor(this.productId, colorId);
-    if (this.productImages.length > 0) {
-      this.selectedImage = this.productImages[0];
-    }
-  }
-
-  getColorName(colorId: number): string {
-    const color = this.colorsService.getColorById(colorId);
-    return color ? color.name : '';
+  selectSize(size: string): void {
+    this.selectedSize = size;
   }
 
   selectImage(imageUrl: string): void {
     this.selectedImage = imageUrl;
+  }
+
+  increment(): void {
+    this.quantity++;
+  }
+
+  decrement(): void {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
   }
 
   addToCart(): void {
