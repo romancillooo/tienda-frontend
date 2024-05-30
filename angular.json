@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "tienda-en-linea:build:production"
+              "buildTarget": "tienda-en-linea:build:production"
             },
             "development": {
-              "browserTarget": "tienda-en-linea:build:development"
+              "buildTarget": "tienda-en-linea:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tienda-en-linea:build"
+            "buildTarget": "tienda-en-linea:build"
           }
         },
         "test": {
