@@ -1,21 +1,20 @@
 <div class="product-container" *ngIf="product">
   <!-- Imágenes del Producto -->
   <div class="product-images-sidebar">
-    <div class="thumbnail" *ngFor="let image of productImages" (click)="selectImage(image)">
+    <div class="thumbnail" *ngFor="let image of productImages; let i = index" (click)="selectImage(image, i)">
       <img [src]="image" [class.selected]="image === selectedImage" alt="{{ product.name }}">
     </div>
   </div>
 
   <!-- Imagen Seleccionada -->
   <div class="product-image-main">
-    <img [src]="selectedImage" alt="{{ product.name }}">
+    <img [src]="selectedImage" [class]="animationClass" alt="{{ product.name }}" (animationend)="onAnimationEnd()">
   </div>
 
   <!-- Información del Producto -->
   <div class="product-info">
     <h1>{{ product.name }}</h1>
     <p class="price">${{ product.price | number }}</p>
-    <p class="description">{{ product.description }}</p>
 
     <!-- Opciones de Color -->
     <div class="color-options">
@@ -45,23 +44,15 @@
 
     <!-- Botones de Acción -->
     <div class="action-buttons">
-      <button class="add-to-bag" (click)="addToCart()">Add to Bag</button>
+      <button class="add-to-bag" (click)="addToCart()">Añadir al carrito</button>
       <button class="add-to-wishlist" (click)="addToWishlist()">{{ addToWishlistText }}</button>
     </div>
 
     <!-- Tabs de Información Adicional -->
     <div class="additional-info">
-      <div class="info-tab">
-        <h3>Description</h3>
-        <p>{{ product.fullDescription }}</p>
-      </div>
-      <div class="info-tab">
-        <h3>Shipping & Returns</h3>
-        <p>{{ product.shippingAndReturns }}</p>
-      </div>
-      <div class="info-tab">
-        <h3>Share</h3>
-        <p>Share this product with your friends!</p>
+      <div class="info-tab" (click)="toggleSection('description')">
+        <h3>Description <i class="fas fa-plus"></i></h3>
+        <p *ngIf="isSectionVisible('description')">{{ product.description }}</p>
       </div>
     </div>
   </div>

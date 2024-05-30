@@ -8,14 +8,18 @@ export class ProductsService {
   private products = [
     {
       id: 1,
-      name: 'ORGANIZED CHAOS PIGMENT T-SHIRT',
+      name: 'FOGGY PA T-SHIRT',
       price: 1099.00,
-      description: 'A stylish T-shirt.',
+      description: 'EMBLEMS AND IMAGES EXPRESSING A SENSE OF IDENTITY. MENS BLACK SHORT-SLEEVED T-SHIRT WITH SMOKE EFFECT PRINT IN WHITE ON THE FRONT AND GOLD METAL MONOGRAM PATCH ON THE BACK.',
       availableColors: ['black', 'white', 'beige', 'yellow', 'pink', 'purple'],
-      availableSizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+      availableSizes: ['S', 'M', 'L', 'XL'],
       images: [
         'assets/img/palm-angels-foggy-pa-t-shirt_21773706_51846941_2048.jpg',
-        'assets/img/palm-angels-foggy-pa-t-shirt_21773706_51846951_2048.jpg'
+        'assets/img/palm-angels-foggy-pa-t-shirt_21773706_51846951_2048.jpg',
+        'assets/img/products/amiri/shirts/jpg/palm-angels-foggy-pa-t-shirt_21773706_51846948_2048.jpg',
+        'assets/img/products/amiri/shirts/jpg/palm-angels-foggy-pa-t-shirt_21773706_51846960_2048.jpg',
+        'assets/img/products/amiri/shirts/jpg/palm-angels-foggy-pa-t-shirt_21773706_51846965_800.jpg',
+        'assets/img/products/amiri/shirts/jpg/palm-angels-foggy-pa-t-shirt_21773706_51846966_800.jpg'
       ],
       new: true
     },
