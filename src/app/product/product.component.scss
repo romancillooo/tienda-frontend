@@ -1,14 +1,15 @@
 .product-container {
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 20px;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  padding: 50px;
+  gap: 70px;
 }
 
 .product-images-sidebar {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex-shrink: 0; /* Evita que la barra lateral se reduzca */
 }
 
 .product-images-sidebar .thumbnail {
@@ -19,24 +20,30 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border: 2px solid transparent;
+  opacity: 0.5;
+  transition: opacity 0.3s;
 }
 
 .product-images-sidebar .thumbnail img.selected {
-  border-color: black;
+  opacity: 1;
 }
 
 .product-image-main {
-  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Centra la imagen principal horizontalmente */
+  align-items: center; /* Centra la imagen principal verticalmente */
+  flex-shrink: 0;
 }
 
 .product-image-main img {
-  width: 500px;
+  max-width: 700px; /* Ajusta el tamaño máximo de la imagen */
   height: auto;
+  transition: transform 0.5s;
 }
 
 .product-info {
-  max-width: 300px;
+  max-width: 600px;
+  flex-grow: 1; /* Permite que la información del producto crezca */
 }
 
 .product-info h1 {
@@ -66,16 +73,26 @@
 
 .color, .size {
   display: inline-block;
-  width: 30px;
-  height: 30px;
-  border: 1px solid #ccc;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000;
+  border-radius: 50%;
   cursor: pointer;
   text-align: center;
-  line-height: 30px;
+  line-height: 40px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.color.selected, .size.selected {
-  border-color: black;
+.colors span:hover,
+.sizes span:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.colors span.selected,
+.sizes span.selected {
+  background-color: #000;
+  color: #fff;
 }
 
 .size-guide {
@@ -84,6 +101,36 @@
   text-decoration: underline;
   cursor: pointer;
   color: blue;
+}
+
+.sizes {
+  display: flex;
+  gap: 10px;
+}
+
+.sizes span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  line-height: 40px;  // Ajusta para centrar verticalmente
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sizes span:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.sizes span.selected {
+  background-color: #000;
+  color: #fff;
 }
 
 .action-buttons {
@@ -98,17 +145,36 @@
   border: none;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .add-to-bag {
   background-color: black;
   color: white;
+  padding: 10px;
+  border: none; // Asegúrate de que el borde esté en none
+  box-sizing: border-box; // Añade esto para asegurar el tamaño correcto
+  border-radius: 5px;
+}
+
+.add-to-bag:hover {
+  background-color: white;
+  color: black;
+  border: none; // Asegúrate de que el borde esté en none
+  box-shadow: 0 0 0 1px black; // Usa una sombra para simular el borde sin cambiar el tamaño del botón
+
 }
 
 .add-to-wishlist {
   background-color: white;
   color: black;
   border: 1px solid black;
+  border-radius: 5px;
+}
+
+.add-to-wishlist:hover {
+  background-color: black;
+  color: white;
 }
 
 .additional-info {
@@ -117,14 +183,27 @@
 
 .info-tab {
   margin-bottom: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
 }
 
 .info-tab h3 {
   font-size: 18px;
   margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-tab h3 i {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #333; /* Cambia este color según tu diseño */
 }
 
 .info-tab p {
   font-size: 14px;
   color: #666;
+  margin: 0;
+  padding: 10px 0;
 }

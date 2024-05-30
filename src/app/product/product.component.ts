@@ -25,6 +25,8 @@ export class ProductComponent implements OnInit {
   quantity: number = 1;
   productImages: string[] = [];
   selectedImage: string = '';
+  animationClass: string = '';
+  visibleSections: { [key: string]: boolean } = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -60,16 +62,21 @@ export class ProductComponent implements OnInit {
     this.updateButtonText();
   }
 
+  selectImage(imageUrl: string, index: number): void {
+    this.animationClass = index > this.productImages.indexOf(this.selectedImage) ? 'animate-up' : 'animate-down';
+    this.selectedImage = imageUrl;
+  }
+
+  onAnimationEnd(): void {
+    this.animationClass = '';
+  }
+
   selectColor(color: string): void {
     this.selectedColor = color;
   }
 
   selectSize(size: string): void {
     this.selectedSize = size;
-  }
-
-  selectImage(imageUrl: string): void {
-    this.selectedImage = imageUrl;
   }
 
   increment(): void {
@@ -98,9 +105,17 @@ export class ProductComponent implements OnInit {
 
   updateButtonText(): void {
     if (this.isInWishlist) {
-      this.addToWishlistText = 'Added To Wishlist!';
+      this.addToWishlistText = 'Añadido a lista de deseos!';
     } else {
-      this.addToWishlistText = 'Add to Wishlist';
+      this.addToWishlistText = 'Añadir a lista de deseos';
     }
+  }
+
+  toggleSection(section: string): void {
+    this.visibleSections[section] = !this.visibleSections[section];
+  }
+
+  isSectionVisible(section: string): boolean {
+    return this.visibleSections[section];
   }
 }
