@@ -20,6 +20,7 @@ import { ProductComponent } from './product/product.component';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass, faUser, faCartShopping, faCreditCard, faDollarSign, faTruckFast } from '@fortawesome/free-solid-svg-icons';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 library.add(faCreditCard, faDollarSign, faTruckFast);
 
@@ -46,7 +47,9 @@ library.add(faCreditCard, faDollarSign, faTruckFast);
     HttpClientModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
