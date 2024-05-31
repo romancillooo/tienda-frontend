@@ -12,7 +12,9 @@ export const environment = {
   productColorsEp: 'api/productColors',
   productGalleryEp: 'api/productGallery',
 
-  apiHost: 'http://localhost:3000'
+  apiHost: 'http://localhost:3000',
+
+  assetsBasePath: 'http://localhost:3000/uploads'
 };
 
 /*

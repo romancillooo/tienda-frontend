@@ -1,310 +1,130 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+.brands {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-  .image-container {
-    position: relative;
-    width: 100%; /* Ajusta esto según el ancho deseado para la imagen */
+.brands-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+
+  &:first-child {
+    margin: 0;
   }
-  
-  .image-container img {
+}
+
+.image-container {
+  position: relative;
+
+  img {
     width: 100%;
-    height: auto; /* Esto mantendrá la proporción de la imagen */
-    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
+    display: block;
   }
 
-  .text-image {
-    position: absolute;
-    top: 5vw; /* Ajuste relativo según el tamaño de la pantalla */
-    left: 19vw; /* Ajuste relativo según el tamaño de la pantalla */
-    color: #ffffff;
-    font-size: 4vw; /* Escala la fuente basado en el ancho de la ventana */
-    text-transform: uppercase;
-  }
-  
-  
-  .image-button {
-    position: absolute;
-    top: 40%; /* Centra el botón verticalmente */
-    left: 20%; /* Centra el botón horizontalmente */
-    background-color: transparent; /* Color de fondo semitransparente */
-    border: 1px solid white; /* Borde transparente inicial */
-    color:rgb(255, 255, 255); /* Color del texto */
-    padding: 12px 25px;
-    line-height: 1;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background-color 0.5s, color 0.5s, border-color 0.5s; /* Suave transición para los cambios */
-    border-radius: 6px;
-  }
-  
-  .image-button:hover,
-  .image-button-content:hover {
-    background-color: #ffffff; /* Nuevo color de fondo más sólido */
-    color: rgb(78, 181, 58); /* Color del texto a blanco */
-    border-color: white; /* Borde blanco */
-  }
-
-  .container {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    gap: 50px;
-    max-width: 1200px; /* Ajusta esto según el ancho deseado para el contenedor */
-    margin: 0 auto;
-    padding: 0 20px;
-    padding-top: 40px;
-  }
-  
-  .main-image {
-    flex: 1; /* Ocupa 1 fracción del espacio disponible */
-    width: 50%; /* Ajusta esto según tus necesidades */
-  }
-  
-  .main-image img {
-    width: 100%;
-    height: auto; /* Mantiene la proporción de la imagen */
-    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
-  }
-  
-  .product-grid {
-    flex: 1;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .product {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .image-container-main,
-  .image-container-main1 {
-    position: relative;
-    width: 100%;
-  }
-
-  .image-container-main img {
-    width: 100%;
-    height: auto; /* Esto mantendrá la proporción de la imagen */
-    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
-    margin-top: 40px;
-  }
-
-  .image-container-main1 img {
-    width: 100%;
-    height: auto; /* Esto mantendrá la proporción de la imagen */
-    display: block; /* Elimina cualquier espacio extra debajo de la imagen */
-  }
-
-
-  
-  .image-container {
-    position: relative;
-    width: 100%;
-    padding-top: 100%; /* Mantiene una relación de aspecto cuadrada */
-  }
-  
-  .image-container img {
+  .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Mantiene la proporción de la imagen */
-    transition: opacity 0.50s ease-in-out 0s;
-  }
-  
-  .principal-image {
-    opacity: 1;
+    background: rgba(0, 0, 0, 0.3);
     z-index: 1;
   }
-  
-  .hover-image {
-    opacity: 0;
-    z-index: 2;
-  }
-  
-  .product:hover .principal-image {
-    opacity: 0;
-  }
-  
-  .product:hover .hover-image {
-    opacity: 1;
-  }
-  
-  .product p {
-    margin: 10px 0 0;
-  }
-  
-  .price {
-    font-weight: 400;
-    margin: 5px 0 0;
-  }
-  
-                                
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
-  
-    .main-image, .product-grid {
-      width: 100%; /* Cada sección toma el ancho completo en pantallas pequeñas */
-      height: auto; /* Permite que cada sección determine su propia altura en pantallas pequeñas */
-    }
-  }
 
-  @media (max-width: 768px) {
-    .text-image {
-      font-size: 5vw; /* Tamaño de fuente más grande para dispositivos pequeños */
-      top: 3vw; /* Posición ajustada para pantallas más pequeñas */
-      left: 20vw; /* Posición ajustada para pantallas más pequeñas */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .text-image {
-      font-size: 5vw; /* Tamaño de fuente aún mayor para pantallas muy pequeñas */
-      top: 3vw; /* Posición más baja para evitar recortes */
-      left: 20vw; /* Posición más a la izquierda para alineación adecuada */
-    }
-  }
-
-  .contenedor{
-    display: flex;
-    justify-content: space-between; /* Asegura que haya espacio entre los elementos */
-    align-items: center; /* Alinea los elementos verticalmente en el centro */
-    width: 100%; /* Ocupa el ancho total disponible */
-    padding-top: 40px;
-    gap: 20px;
-  }
-  
-  .product-container {
-    width: 33%; /* Da a cada contenedor de productos un tercio del ancho del contenedor padre */
-    position: relative; /* Posición relativa para posicionamiento absoluto de elementos internos */
-    overflow: hidden; /* Oculta cualquier contenido que se desborde */
-    cursor: pointer;
-  }
-  
-  .product-container img {
-    width: 100%;
-    height: auto;
-    transition: transform 0.5s ease; /* Animación suave para el efecto de zoom */
-  }
-  
-  .product-container:hover img {
-    transform: scale(1.1); /* Aumenta el tamaño de la imagen */
-  }
-
-  .image-button-content {
+  .brand-info {
     position: absolute;
-    bottom: 10%; /* Ajusta esta propiedad para posicionar verticalmente */
-    left: 50%; /* Empieza en el centro horizontalmente */
-    transform: translateX(-50%);
-    background-color: transparent; /* Color de fondo semitransparente */
-    border: 1px solid white; /* Borde transparente inicial */
-    color:rgb(255, 255, 255); /* Color del texto */
-    padding: 12px 25px;
-    line-height: 1;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background-color 0.5s, color 0.5s, border-color 0.5s; /* Suave transición para los cambios */
-    border-radius: 6px;
-    text-transform: uppercase;
-  }
-  
-  .label {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+    top: 48%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    text-align: center;
     color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px;
-    text-transform: uppercase;
-  }
-  
+    border-radius: 5px;
+    z-index: 2;
 
-  @media (max-width: 768px) {
-    .contenedor {
-      flex-direction: column;
-    }
-  
-    .product-container {
-      width: 100%; /* Cada contenedor ocupa el ancho completo en pantallas pequeñas */
+    p {
+      text-transform: uppercase;
+      font-family: var(--fuentePrincipal);
+      font-weight: 700;
+      font-size: 60px;
     }
   }
+}
 
-  .info-banner {
+.view-more-button {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  text-transform: uppercase;
+  margin: 20px 0 0;
+}
+
+.view-more-button:hover {
+  color: var(--colorPrimario);
+  background-color: white;
+  transform: scale(1.04);
+}
+
+.brand-products-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 20px 50px;
+
+  .image-product-brand {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
-    background-color: #333333; /* Fondo negro */
-    color: #fff; /* Texto blanco */
-    padding: 3rem;
-    font-family: "Roboto", sans-serif; /* Fuente genérica, ajusta según la necesidad */
-    align-items: baseline;
-    margin-top: 10px;
-}
 
-.info-item {
-    display: flex;
-    flex-direction: column; /* Elementos en columna */
-    justify-items: center;
-    align-items: center;
-}
-
-.info-item img {
-    width: 60px; /* Ajusta el tamaño del icono según sea necesario */
-    margin-bottom: 10px;
-}
-
-.info-text h3 {
-    font-size: 15px;
-    margin: 0;
-    text-align: center;
-}
-
-.info-text p {
-    font-size: 12px;
-    text-align: center;
-    margin: 5px 60px;
-}
-
-@media (max-width: 600px) {
-    .info-banner {
-      grid-template-columns: repeat(1, 3fr);
-        flex-direction: column;
-        text-align: center;
+    img {
+      width: 100%;
+      border-radius: 2px;
     }
-    .info-item {
-        margin-bottom: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-  .info-banner {
-    grid-template-columns: repeat(1, 3fr);
   }
-  .info-item {
-    margin-top: 10px;
+
+  .products-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 0 0 0 20px;
+
+    .product {
+      text-align: center;
+      cursor: pointer;
+
+      .product-img {
+        img {
+          width: 220px;
+          height: auto;
+          transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        &:hover img {
+          transform: scale(1.06);
+          width: 220px;
+        }
+      }
+
+
+      .product-name {
+
+        h4 {
+          font-family: var(--fuentePrincipal);
+          font-weight: 600;
+        }
+      }
+
+      .product-price {
+        margin-top: 5px;
+        font-weight: bold;
+        font-family: var(--fuentePrincipal);
+        color: green
+      }
+    }
   }
 }
-
-.icon-info {
-  width: 50px;
-  justify-items: center;
-  margin-bottom: 20px;
-}
-
-.icon-info2 {
-  width: 35px;
-  justify-items: center;
-  margin-bottom: 20px;
-}
-

@@ -47,7 +47,7 @@ export class ProductComponent implements OnInit {
   }
 
   loadProductDetails(): void {
-    this.productsService.getProductById(this.productId).subscribe(product => {
+    this.productsService.getProductById(this.productId).subscribe((product: any) => {
       this.product = product;
       if (this.product) {
         this.selectedColor = this.product.availableColors[0];
