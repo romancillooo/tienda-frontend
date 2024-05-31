@@ -2,8 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--colorSecundario);
-  font-family: var(--fuentePrincipal);
+  background-color: var(--colorPrimario);
   height: 30px;
   width: 100%;
   padding: 5px;
@@ -11,8 +10,10 @@
   h2 {
     font-size: 15px;
     text-transform: uppercase;
-    color: var(--colorPrimario);
+    color: var(--colorSecundario);
     font-weight: 700;
+    font-family: var(--fuentePrincipal);
+    margin: 0;
   }
 }
 
@@ -21,8 +22,8 @@
   font-family: var(--fuentePrincipal);
   padding: 15px 5px;
 
-  @media (min-width: 1024px) { //min desktop
-    padding: 15px 60px;
+  @media (min-width: 1024px) {
+    padding: 15px 20px;
   }
 }
 
@@ -45,7 +46,7 @@
   }
 }
 
-.cart-icon, .heart-icon {
+.cart-icon, .heart-icon, .user-icon {
   font-size: 23.5px;
   cursor: pointer;
   color: var(--colorPrimario);

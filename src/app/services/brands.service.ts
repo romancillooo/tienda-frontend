@@ -1,37 +1,21 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrandsService {
-  brands = [
-    {
-      id: 1,
-      name: 'Amiri',
-      image: 'assets/img/brands-icons/logos/amiri-logo.png',
-      large_image: 'assets/img/brand-icons/large-logos/amiri-large-logo.png',
-    },
-    {
-      id: 2,
-      name: 'Gucci',
-      image: 'assets/img/brands-icons/logos/gucci-logo.png',
-      large_image: 'assets/img/brand-icons/large-logos/gucci-large-logo.png',
-    },
-    {
-      id: 3,
-      name: 'Burberry',
-      image: 'assets/img/brands-icons/logos/burberry-logo.png',
-      large_image: 'assets/img/brand-icons/large-logos/burberry-large-logo.png',
-    },
-  ];
+  private apiUrl = `${environment.apiHost}${environment.brandsEp}`;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getBrands() {
-    return this.brands;
+  getBrands(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  getBrandById(brandId: number) {
-    return this.brands.find(brand => brand.id === brandId);
+  getBrandById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 }
