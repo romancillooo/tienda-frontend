@@ -15,6 +15,12 @@
     font-family: var(--fuentePrincipal);
     margin: 0;
   }
+
+  @media (max-width: 680px) {
+    h2 {
+      font-size: 12px;
+    }
+  }
 }
 
 .navbar {
@@ -30,37 +36,39 @@
 .navbar-logo {
   img {
     width: 43px;
+
+    @media (max-width: 960px) {
+      width: 35px;
+    }
   }
 }
 
-.cart-icon {
+.icons-group {
+  display: flex;
+  align-items: center;
   margin-left: auto;
-}
 
-.heart-icon {
-  margin: 0 25px;
+  .cart-icon, .heart-icon, .user-icon {
+    font-size: 23.5px;
+    cursor: pointer;
+    color: var(--colorPrimario);
+    transition: ease-in 0.3s;
+    margin: 0 10px;
 
-  @media (min-width: 1024px) {
-    margin: 0 10px 0 20px;
+    &:hover {
+      transform: scale(1.1);
+    }
 
-  }
-}
-
-.cart-icon, .heart-icon, .user-icon {
-  font-size: 23.5px;
-  cursor: pointer;
-  color: var(--colorPrimario);
-  transition: ease-in 0.3s;
-
-  &:hover {
-    transform: scale(1.1);
+    @media (min-width: 1024px) {
+      font-size: 20px;
+    }
   }
 
-  @media (min-width: 1024px) {
-    font-size: 20px;
-
+  @media (max-width: 1024px) {
+    .user-icon {
+      display: none;
+    }
   }
-
 }
 
 .bars-btn {
@@ -69,11 +77,15 @@
   border: none;
   background-color: transparent;
   color: var(--colorPrimario);
+  display: none;
 
   i {
     font-size: 25px;
   }
 
+  @media (max-width: 1024px) {
+    display: block;
+  }
 }
 
 .nav-link {
@@ -106,4 +118,69 @@
 .cart-overlay.active {
   display: block;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.contenedor-general {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  @media (max-width: 1024px) {
+    .navbar-logo {
+      order: 2;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      width: auto;
+
+      img {
+        margin: 0 auto;
+      }
+    }
+
+    .cart-icon,
+    .heart-icon {
+      order: 3;
+    }
+
+    .bars-btn {
+      order: 1;
+    }
+
+    .user-icon {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .navbar-logo {
+      margin-right: auto;
+    }
+
+    .icons-group {
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 767px), (min-width: 768px) and (max-width: 1023px) {
+    .navbar-logo {
+      order: 2;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .icons-group {
+      order: 3;
+      margin-left: auto;
+    }
+
+    .bars-btn {
+      order: 1;
+      margin-right: auto;
+    }
+  }
 }
