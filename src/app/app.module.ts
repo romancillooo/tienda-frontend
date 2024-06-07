@@ -16,14 +16,11 @@ import { CartComponent } from './cart/cart.component';
 import { FooterComponent } from './footer/footer.component';
 import { WishlistComponent } from './wish-list/wish-list.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component'; // Importar el componente de registro
 import { ProductComponent } from './product/product.component';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass, faUser, faCartShopping, faCreditCard, faDollarSign, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
-library.add(faCreditCard, faDollarSign, faTruckFast);
-
 
 @NgModule({
   declarations: [
@@ -36,12 +33,13 @@ library.add(faCreditCard, faDollarSign, faTruckFast);
     FooterComponent,
     WishlistComponent,
     LoginComponent,
+    RegisterComponent, // Asegúrate de que RegisterComponent esté declarado
     ProductComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
-    FormsModule,
+    FormsModule, // Asegúrate de que FormsModule esté importado
     NgbModule,
     AppRoutingModule,
     HttpClientModule,
@@ -52,7 +50,7 @@ library.add(faCreditCard, faDollarSign, faTruckFast);
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   constructor(library: FaIconLibrary) {
     library.addIcons(faMagnifyingGlass, faUser, faCartShopping, faCreditCard, faDollarSign, faTruckFast);
   }

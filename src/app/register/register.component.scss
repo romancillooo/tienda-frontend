@@ -26,7 +26,7 @@
       padding: 10px;
     }
 
-    .login-title {
+    .register-title {
       margin-bottom: 20px;
       font-family: var(--fuentePrincipal);
       font-size: 30px;
@@ -37,7 +37,7 @@
       }
     }
 
-    .login-container {
+    .register-container {
       width: 500px;
       border: 1px solid var(--colorPrimario);
       background-color: white;
@@ -57,11 +57,11 @@
       }
     }
 
-    .btn-login {
-      width: 100%;
-      margin-top: 10px;
+    .btn-register {
       background-color: var(--colorPrimario);
       color: white;
+      width: 100%;
+      margin-top: 10px;
 
       @media (max-width: 768px) {
         font-size: 16px;
@@ -84,7 +84,6 @@
 
     img {
       width: 100px;
-      cursor: pointer;
     }
   }
 }
