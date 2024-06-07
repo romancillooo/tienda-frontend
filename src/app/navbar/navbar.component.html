@@ -8,6 +8,9 @@
         <img src="../../assets/img/logos/border-logo.png" alt="Logo Negro" />
       </a>
     </div>
+    <button class="bars-btn" type="button" (click)="toggleSideMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
     <div class="icons-group">
       <div class="heart-icon" routerLink="/wishlist">
         <i class="fa-solid fa-heart"></i>
@@ -15,13 +18,7 @@
       <div class="cart-icon" (click)="toggleCart()">
         <i class="fas fa-shopping-cart"></i>
       </div>
-      <div class="user-icon" routerLink="/login">
-        <i class="fas fa-user"></i>
-      </div>
     </div>
-    <button class="bars-btn d-lg-none" type="button" (click)="toggleSideMenu()">
-      <i class="fas fa-bars"></i>
-    </button>
   </div>
 </nav>
 

@@ -1,6 +1,7 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SideMenuService } from '../services/side-menu.service';
 import { CartService } from '../services/cart.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -9,9 +10,11 @@ import { CartService } from '../services/cart.service';
 })
 export class SideMenuComponent implements OnInit {
   isOpen = false;
+  userEmail: string | null = null;
 
   constructor(
     public sideMenuService: SideMenuService,
+    public authService: AuthService,
     public cartService: CartService
   ) {}
 
@@ -23,7 +26,11 @@ export class SideMenuComponent implements OnInit {
       } else {
         document.body.classList.remove('overflow-hidden');
       }
-  });
+    });
+
+    this.authService.userEmail$.subscribe(email => {
+      this.userEmail = email;
+    });
   }
 
   closeSideMenu() {
@@ -36,4 +43,8 @@ export class SideMenuComponent implements OnInit {
     this.cartService.toggle();
   }
 
+  logOut() {
+    this.authService.logout();
+    this.closeSideMenu();
+  }
 }
