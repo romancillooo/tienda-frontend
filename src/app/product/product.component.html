@@ -16,15 +16,16 @@
     <h1>{{ product.name }}</h1>
     <p class="price">${{ product.price | number }}</p>
 
-    <!-- Opciones de Color -->
+    <!-- Opción de Imagen -->
     <div class="color-options">
       <h3>Colour: {{ selectedColor }}</h3>
       <div class="colors">
         <span 
-          *ngFor="let color of product.availableColors"
-          [class.selected]="color === selectedColor"
-          [style.background-color]="color"
-          (click)="selectColor(color)">
+        class="color-selector"
+        [class.selected]="selectedColor === product.availableColors[0]"
+        (click)="selectColor(product.availableColors[0])"
+        [style.background-image]="'url(' + productImages[0] + ')'"
+        [style.background-size]="'cover'">
         </span>
       </div>
     </div>
@@ -51,9 +52,15 @@
     <!-- Tabs de Información Adicional -->
     <div class="additional-info">
       <div class="info-tab" (click)="toggleSection('description')">
-        <h3>Description <i class="fas fa-plus"></i></h3>
-        <p *ngIf="isSectionVisible('description')">{{ product.description }}</p>
+        <h3>Descripción <i class="fas fa-plus"></i></h3>
       </div>
+      <div class="info-content-container" [class.open]="isSectionVisible('description')">
+        <div class="info-content">
+          <p>{{ product.description }}</p>
+        </div>
+      </div>
+      <div class="line" [class.open]="isSectionVisible('description')"></div> <!-- Línea que se mueve -->
     </div>
+               
   </div>
 </div>

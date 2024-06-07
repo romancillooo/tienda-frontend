@@ -7,7 +7,6 @@
     <h4 class="cart-title">Cart</h4>
   </div>
   <div class="cart-items">
-
     <div class="cart-item" *ngFor="let product of cartItems">
       <div class="product-info">
         <img
@@ -26,22 +25,16 @@
         </div>
         <button class="remove-item-btn" (click)="deleteProduct(product.id)">
           <i class="fas fa-trash"></i>
-
         </button>
       </div>
-
-
     </div>
-
   </div>
   <div class="cart-summary">
     <p class="total-text">Total: <span class="total-price">{{ cartTotal | currency }}</span></p>
     <div class="cart-btns">
-      <button class="checkout-btn">Go to Checkout</button>
+      <button class="checkout-btn" (click)="goToPayment()">Go to Checkout</button>
       <button class="clear-cart-btn" (click)="clearCart()">Clear Cart</button>
     </div>
-
-
   </div>
 </div>
 <div class="overlay" *ngIf="isOpen" (click)="closeCart()"></div>
