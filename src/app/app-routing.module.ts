@@ -6,6 +6,8 @@ import { WishlistComponent } from './wish-list/wish-list.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PaymentComponent } from './payment/payment.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
 
   { path: 'product/:productId', component: ProductComponent },
+
+  { path: 'payment', component: PaymentComponent }
 ];
 
 @NgModule({

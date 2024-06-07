@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class CartComponent implements OnInit {
   cartTotal: number = 0;
   isOpen = false;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.cartService.isCartOpen$.subscribe((isOpen) => {
@@ -58,5 +59,9 @@ export class CartComponent implements OnInit {
   closeCart() {
     console.log('Carrito Cerrado');
     this.cartService.close();
+  }
+
+  goToPayment() {
+    this.router.navigate(['/payment']);
   }
 }

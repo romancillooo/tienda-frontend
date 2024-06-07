@@ -1,0 +1,51 @@
+<div class="payment-container">
+    <h2>Pago express</h2>
+    <button class="paypal-button">
+      <i class="fa-brands fa-cc-paypal"></i>
+    </button>
+    <hr>
+    <h3>Contacto</h3>
+    <input type="email" placeholder="Email o número de teléfono móvil">
+    <input type="checkbox"> Enviarme novedades y ofertas por correo electrónico
+    <h3>Entrega</h3>
+    <form>
+      <select>
+        <option value="MX">México</option>
+        <!-- Otros países -->
+      </select>
+      <input type="text" placeholder="Nombre">
+      <input type="text" placeholder="Apellidos">
+      <input type="text" placeholder="Dirección">
+      <input type="text" placeholder="Casa, apartamento, etc. (opcional)">
+      <input type="text" placeholder="Código postal">
+      <input type="text" placeholder="Ciudad">
+      <select>
+        <option value="Sinaloa">Sinaloa</option>
+        <!-- Otros estados -->
+      </select>
+      <input type="text" placeholder="Teléfono">
+      <input type="checkbox"> Guardar mi información y consultar más rápidamente la próxima vez
+    </form>
+    <h3>Métodos de envío</h3>
+    <p>Ingresa tu dirección de envío para ver los métodos disponibles.</p>
+    <h3>Pago</h3>
+    <form>
+      <div>
+        <input type="radio" name="payment-method" value="credit-card"> Tarjeta de crédito
+        <input type="text" placeholder="Número de tarjeta">
+        <input type="text" placeholder="Fecha de vencimiento (MM / AA)">
+        <input type="text" placeholder="Código de seguridad">
+        <input type="text" placeholder="Nombre del titular">
+        <input type="checkbox"> Usar la dirección de envío como dirección de facturación
+      </div>
+      <div>
+        <input type="radio" name="payment-method" value="paypal"> PayPal
+        <button class="paypal-button">PayPal</button>
+      </div>
+      <div>
+        <input type="radio" name="payment-method" value="bank-deposit"> Depósito Bancario
+      </div>
+      <button type="submit">Pagar ahora</button>
+    </form>
+  </div>
+  
