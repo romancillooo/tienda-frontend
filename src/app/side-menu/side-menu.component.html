@@ -1,6 +1,20 @@
 <div class="side-menu" [class.open]="isOpen">
   <div class="btn-close-container">
-    <i class="fas fa-times fa-2x" (click)="closeSideMenu()"></i>
+    <svg
+      class="close-icon"
+      width="50"
+      height="50"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      viewBox="0 0 24 24"
+      (click)="closeSideMenu()"
+    >
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
   </div>
   <ul>
     <div class="menu-item">

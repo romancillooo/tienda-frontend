@@ -5,8 +5,7 @@ import { BrandsService } from '../services/brands.service';
 import { CategoriesService } from '../services/categories.service';
 import { CartService } from '../services/cart.service';
 import { WishlistService } from '../services/wishlist.service';
-import { ProductColorsService } from '../services/product-colors.service';
-import { ColorsService } from '../services/colors.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-product',
@@ -18,15 +17,16 @@ export class ProductComponent implements OnInit {
   product: any = {};
   brand: any = {};
   category: any = {};
-  addToWishlistText: string = 'Add to Wishlist';
+  addToWishlistText: string = 'Añadir a lista de deseos';
   isInWishlist: boolean = false;
-  selectedColor: string = '';
+  selectedColor: any = {};
   selectedSize: string = '';
   quantity: number = 1;
   productImages: string[] = [];
   selectedImage: string = '';
   animationClass: string = '';
   visibleSections: { [key: string]: boolean } = {};
+  assetsBasePath: string = environment.assetsBasePath;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,15 +34,14 @@ export class ProductComponent implements OnInit {
     private brandsService: BrandsService,
     private cartService: CartService,
     private wishlistService: WishlistService,
-    private categoriesService: CategoriesService,
-    private productColorsService: ProductColorsService,
-    private colorsService: ColorsService
+    private categoriesService: CategoriesService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.productId = +params['productId'];
       this.loadProductDetails();
+      this.scrollToTop();
     });
   }
 
@@ -50,16 +49,29 @@ export class ProductComponent implements OnInit {
     this.productsService.getProductById(this.productId).subscribe((product: any) => {
       this.product = product;
       if (this.product) {
-        this.selectedColor = this.product.availableColors[0];
-        this.selectedSize = this.product.availableSizes[0];
-        this.productImages = this.product.images;
-        this.selectedImage = this.productImages[0];
+        this.selectedColor = this.product.colors[0];
+        this.selectedSize = this.product.available_sizes[0];
+        this.loadProductImages();
+        if (this.product.brand_id) {
+          this.brandsService.getBrandById(this.product.brand_id).subscribe(brand => this.brand = brand);
+        }
+        if (this.product.category_id) {
+          this.categoriesService.getCategoryById(this.product.category_id).subscribe(category => this.category = category);
+        }
+        this.isInWishlist = this.wishlistService.isInWishlist(this.product);
+        this.updateButtonText();
       }
     });
-    this.brand = this.brandsService.getBrandById(this.product.brand_id);
-    this.category = this.categoriesService.getCategoryById(this.product.category_id);
-    this.isInWishlist = this.wishlistService.isInWishlist(this.product);
-    this.updateButtonText();
+  }
+
+  loadProductImages(): void {
+    this.productImages = this.selectedColor.galleryImages;
+    this.selectedImage = this.productImages[0];
+  }
+
+  selectColor(color: any): void {
+    this.selectedColor = color;
+    this.loadProductImages();
   }
 
   selectImage(imageUrl: string, index: number): void {
@@ -69,10 +81,6 @@ export class ProductComponent implements OnInit {
 
   onAnimationEnd(): void {
     this.animationClass = '';
-  }
-
-  selectColor(color: string): void {
-    this.selectedColor = color;
   }
 
   selectSize(size: string): void {
@@ -117,5 +125,9 @@ export class ProductComponent implements OnInit {
 
   isSectionVisible(section: string): boolean {
     return this.visibleSections[section];
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

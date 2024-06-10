@@ -68,8 +68,8 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl(`brand/${brandId}`).catch(() => null);
   }
 
-  navigateToProduct(productId: number): void {
-    this.router.navigateByUrl(`product/${productId}`).catch(() => null);
+  navigateToProduct(brandPath: string, productId: number): void {
+    this.router.navigate([brandPath, productId]).catch(() => null);
   }
 
   getBrandsBannerImageUrl(brand: any): string {

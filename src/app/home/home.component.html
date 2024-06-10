@@ -15,7 +15,7 @@
         <img [src]="getBrandsImageUrl(brand)" [alt]="brand.name">
       </div>
       <div class="products-container">
-        <div class="product" *ngFor="let product of brand.products">
+        <div class="product" *ngFor="let product of brand.products" (click)="navigateToProduct(brand.path, product.id)">
           <div class="product-img"
                (mouseenter)="onMouseEnter(product)"
                (mouseleave)="onMouseLeave(product)">

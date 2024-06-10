@@ -1,10 +1,10 @@
-/* Estilos base */
 .product-container {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   gap: 45px;
   padding: 50px;
+  background-color: var(--colorSecundario);
 }
 
 .product-images-sidebar {
@@ -51,12 +51,17 @@
 .product-info h1 {
   font-size: 24px;
   margin-bottom: 10px;
+  font-family: var(--fuentePrincipal);
+  font-weight: 700;
 }
 
 .price {
   font-size: 20px;
   color: #333;
   margin-bottom: 20px;
+  font-family: var(--fuentePrincipal);
+  color: green;
+  font-weight: 500;
 }
 
 .description {
@@ -66,6 +71,10 @@
 
 .color-options, .size-options {
   margin-bottom: 20px;
+
+  h3 {
+    font-family: var(--fuentePrincipal);
+  }
 }
 
 .colors, .sizes {
@@ -84,7 +93,7 @@
   transition: background-color 0.3s, color 0.3s;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; /* Ajusta la imagen para que cubra el espacio */
+  background-size: cover;
 }
 
 .colors span:hover {
@@ -98,8 +107,9 @@
 }
 
 .color-selector {
-  padding: 40px;
+  padding: 20px;
   opacity: 0.8;
+  border-radius: 3px;
 }
 
 .sizes span {
@@ -140,21 +150,24 @@
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
+  font-family: var(--fuentePrincipal);
 }
 
 .add-to-bag, .add-to-wishlist {
   padding: 10px;
   border: none;
   cursor: pointer;
-  font-size: 16px;
-  box-sizing: border-box; /* Asegura que el tamaño del botón incluya el borde */
-  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves para el cambio de color */
+  font-size: 20px;
+  box-sizing: border-box;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+  height: 55px;
 }
 
 .add-to-bag {
   background-color: black;
   color: white;
-  border: 1px solid black; /* Añadir el borde aquí para mantener el tamaño consistente */
+  border: 1px solid black;
 }
 
 .add-to-bag:hover {
@@ -180,17 +193,19 @@
 .info-tab {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Asegura que el texto y el icono estén separados */
+  justify-content: space-between;
   cursor: pointer;
   transition: color 0.3s;
-  border-bottom: none; /* Elimina el borde inferior */
-  padding: 0 10px; /* Añade padding para espacio entre los elementos y los bordes */
+  border-bottom: none;
+  padding: 0 10px;
+  text-transform: uppercase;
 }
 
 .info-tab h3 {
   font-size: 18px;
   transition: color 0.3s;
-  margin-right: auto; /* Hace que el h3 ocupe todo el espacio disponible */
+  margin-right: auto;
+  font-family: var(--fuentePrincipal);
 }
 
 .info-tab:hover h3, .info-tab:hover i {
@@ -324,14 +339,17 @@
     flex-direction: row;
     gap: 10px;
     justify-content: center;
-    margin-bottom: 20px;
     overflow-x: auto;
-    width: 100%; /* Asegura que la galería ocupe todo el ancho */
+    width: 100%;
+
+    @media (max-width: 680px) {
+        margin: 6px 0 0;
+    }
   }
 
   .product-images-sidebar .thumbnail img {
-    width: 60px; /* Ajusta este tamaño para hacer las imágenes más pequeñas */
-    height: 60px; /* Ajusta este tamaño para hacer las imágenes más pequeñas */
+    width: 60px;
+    height: 60px;
   }
 
   .product-image-main {
@@ -387,7 +405,7 @@
   .add-to-bag, .add-to-wishlist {
     font-size: 12px;
     padding: 6px;
-    
+
   }
 
   .info-tab h3 {

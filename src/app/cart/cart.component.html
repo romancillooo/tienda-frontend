@@ -1,6 +1,19 @@
 <div class="cart-sidebar" [class.open]="isOpen">
   <button class="close-btn" (click)="closeCart()">
-    <i class="fas fa-times fa-2x"></i>
+    <svg
+      class="close-icon"
+      width="40"
+      height="40"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      viewBox="0 0 24 24"
+    >
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
   </button>
 
   <div class="cart-header">
@@ -18,13 +31,25 @@
           <h5 class="item-name">{{ product.name }}</h5>
           <p class="item-price">{{ product.price | currency }}</p>
           <div class="quantity-controls">
-            <button class="quantity-control-btn" (click)="decreaseQuantity(product)"><i class="fa fa-minus"></i></button>
+            <button class="quantity-control-btn" (click)="decreaseQuantity(product)">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
             <span class="quantity">{{ product.quantity }}</span>
-            <button class="quantity-control-btn" (click)="increaseQuantity(product)"><i class="fa fa-plus"></i></button>
+            <button class="quantity-control-btn" (click)="increaseQuantity(product)">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
           </div>
         </div>
         <button class="remove-item-btn" (click)="deleteProduct(product.id)">
-          <i class="fas fa-trash"></i>
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6l-2 14H7L5 6m5 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+          </svg>
         </button>
       </div>
     </div>
