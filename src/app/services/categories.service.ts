@@ -1,53 +1,21 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
-  categories = [
-    {
-      id: 1,
-      name: 'T-shirts',
-      path: 't-shirts'
-    },
-    {
-      id: 2,
-      name: 'Hoodies & Sweatshirts',
-      path: 'hoodies-sweatshirts'
-    },
-    {
-      id: 3,
-      name: 'Denim Jeans',
-      path: 'denim-jeans'
-    },
-    {
-      id: 4,
-      name: 'Casual Shirts',
-      path: 'casual-shirts'
-    },
-    {
-      id: 5,
-      name: 'Crossbody Bags',
-      path: 'crossbody-bags'
-    },
-    {
-      id: 6,
-      name: 'Slides',
-      path: 'slides'
-    },
-    {
-      id: 7,
-      name: 'Cardigans',
-      path: 'cardigans'
-    },
-  ]
+  private apiUrl = `${environment.apiHost}${environment.categoriesEp}`;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getCategories() {
-    return this.categories;
+  getCategories(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
-  getCategoryById(categoryId: number) {
-    return this.categories.find(category => category.id === categoryId);
+
+  getCategoryById(categoryId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${categoryId}`);
   }
 }

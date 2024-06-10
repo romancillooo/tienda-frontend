@@ -1,41 +1,36 @@
 <div class="product-container" *ngIf="product">
-  <!-- Imágenes del Producto -->
   <div class="product-images-sidebar">
     <div class="thumbnail" *ngFor="let image of productImages; let i = index" (click)="selectImage(image, i)">
-      <img [src]="image" [class.selected]="image === selectedImage" alt="{{ product.name }}">
+      <img [src]="assetsBasePath + '/product-gallery-images/' + image" [class.selected]="image === selectedImage" alt="{{ product.name }}">
     </div>
   </div>
 
-  <!-- Imagen Seleccionada -->
   <div class="product-image-main">
-    <img [src]="selectedImage" [class]="animationClass" alt="{{ product.name }}" (animationend)="onAnimationEnd()">
+    <img [src]="assetsBasePath + '/product-gallery-images/' + selectedImage" [class]="animationClass" alt="{{ product.name }}" (animationend)="onAnimationEnd()">
   </div>
 
-  <!-- Información del Producto -->
   <div class="product-info">
     <h1>{{ product.name }}</h1>
     <p class="price">${{ product.price | number }}</p>
 
-    <!-- Opción de Imagen -->
     <div class="color-options">
-      <h3>Colour: {{ selectedColor }}</h3>
+      <h3>Colour: {{ selectedColor.color_name }}</h3>
       <div class="colors">
-        <span 
+        <span
+        *ngFor="let color of product.colors"
         class="color-selector"
-        [class.selected]="selectedColor === product.availableColors[0]"
-        (click)="selectColor(product.availableColors[0])"
-        [style.background-image]="'url(' + productImages[0] + ')'"
-        [style.background-size]="'cover'">
+        [class.selected]="selectedColor === color"
+        (click)="selectColor(color)"
+        [style.background-color]="color.hex_code">
         </span>
       </div>
     </div>
 
-    <!-- Opciones de Talla -->
     <div class="size-options">
-      <h3>Size (Palm Angels Standard)</h3>
+      <h3>Size ({{ brand.name }} Standard)</h3>
       <div class="sizes">
-        <span 
-          *ngFor="let size of product.availableSizes"
+        <span
+          *ngFor="let size of product.available_sizes"
           [class.selected]="size === selectedSize"
           (click)="selectSize(size)">
           {{ size }}
@@ -43,24 +38,21 @@
       </div>
     </div>
 
-    <!-- Botones de Acción -->
     <div class="action-buttons">
       <button class="add-to-bag" (click)="addToCart()">Añadir al carrito</button>
       <button class="add-to-wishlist" (click)="addToWishlist()">{{ addToWishlistText }}</button>
     </div>
 
-    <!-- Tabs de Información Adicional -->
     <div class="additional-info">
       <div class="info-tab" (click)="toggleSection('description')">
-        <h3>Descripción <i class="fas fa-plus"></i></h3>
+        <h3>Description <i class="fas fa-plus"></i></h3>
       </div>
       <div class="info-content-container" [class.open]="isSectionVisible('description')">
         <div class="info-content">
           <p>{{ product.description }}</p>
         </div>
       </div>
-      <div class="line" [class.open]="isSectionVisible('description')"></div> <!-- Línea que se mueve -->
+      <div class="line" [class.open]="isSectionVisible('description')"></div>
     </div>
-               
   </div>
 </div>

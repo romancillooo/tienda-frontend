@@ -11,15 +11,10 @@ import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
-
   { path: 'login', component: LoginComponent },
-
   { path: 'register', component: RegisterComponent },
-
-  { path: 'product/:productId', component: ProductComponent },
-
+  { path: ':brandPath/:productId', component: ProductComponent },
   { path: 'payment', component: PaymentComponent }
 ];
 

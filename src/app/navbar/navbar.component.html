@@ -1,7 +1,7 @@
 <div class="text-content">
   <h2>Free shipping on purchases of $150 usd</h2>
 </div>
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg" [ngClass]="{ 'hidden': isHidden }">
   <div class="container-fluid contenedor-general">
     <div class="navbar-logo">
       <a routerLink="/" class="nav-link">
@@ -9,14 +9,22 @@
       </a>
     </div>
     <button class="bars-btn" type="button" (click)="toggleSideMenu()">
-      <i class="fas fa-bars"></i>
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <path d="M3 12h18M3 6h18M3 18h18"></path>
+      </svg>
     </button>
     <div class="icons-group">
       <div class="heart-icon" routerLink="/wishlist">
-        <i class="fa-solid fa-heart"></i>
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
       </div>
       <div class="cart-icon" (click)="toggleCart()">
-        <i class="fas fa-shopping-cart"></i>
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l1.68 10.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
       </div>
     </div>
   </div>
