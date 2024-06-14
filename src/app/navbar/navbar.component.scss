@@ -10,7 +10,7 @@
   h2 {
     font-size: 15px;
     text-transform: uppercase;
-    color: var(--colorSecundario);
+    color: white;
     font-weight: 700;
     font-family: var(--fuentePrincipal);
     margin: 0;
@@ -34,12 +34,16 @@
   transition: transform 0.3s ease, background-color 0.3s ease;
   background-color: white;
 
-  &.hidden {
-    transform: translateY(-100%);
+  @media (max-width: 820px) {
+      padding: 25px 5px;
   }
 
-  @media (min-width: 1024px) {
-    padding: 15px 20px;
+  @media (max-width: 680px) {
+      padding: 20px 5px;
+  }
+
+  &.hidden {
+    transform: translateY(-100%);
   }
 }
 
@@ -47,8 +51,12 @@
   img {
     width: 43px;
 
-    @media (max-width: 960px) {
-      width: 35px;
+    @media (max-width: 820px) {
+        width: 39px;
+    }
+
+    @media (max-width: 680px) {
+        width: 35px;
     }
   }
 }
@@ -59,7 +67,6 @@
   margin-left: auto;
 
   .cart-icon, .heart-icon {
-    font-size: 23.5px;
     cursor: pointer;
     color: var(--colorPrimario);
     transition: ease-in 0.3s;
@@ -67,10 +74,6 @@
 
     &:hover {
       transform: scale(1.1);
-    }
-
-    @media (min-width: 1024px) {
-      font-size: 20px;
     }
   }
 

@@ -1,65 +1,96 @@
 <div class="cart-sidebar" [class.open]="isOpen">
-  <button class="close-btn" (click)="closeCart()">
-    <svg
-      class="close-icon"
-      width="40"
-      height="40"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      viewBox="0 0 24 24"
-    >
-      <line x1="18" y1="6" x2="6" y2="18"></line>
-      <line x1="6" y1="6" x2="18" y2="18"></line>
-    </svg>
-  </button>
-
   <div class="cart-header">
-    <h4 class="cart-title">Cart</h4>
+    <div class="cart-title-container" *ngIf="cartItems.length > 0">
+      <h4>Tu Carrito de Compra</h4>
+    </div>
+    <div class="close-btn-container">
+      <svg
+        class="close-icon"
+        width="35"
+        height="35"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        viewBox="0 0 24 24"
+        (click)="closeCart()"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
   </div>
-  <div class="cart-items">
-    <div class="cart-item" *ngFor="let product of cartItems">
-      <div class="product-info">
-        <img
-          class="product-image"
-          [src]="product.image"
-          [alt]="product.name"
-        />
-        <div class="product-details">
-          <h5 class="item-name">{{ product.name }}</h5>
-          <p class="item-price">{{ product.price | currency }}</p>
-          <div class="quantity-controls">
-            <button class="quantity-control-btn" (click)="decreaseQuantity(product)">
+
+  <div *ngIf="cartItems.length > 0; else emptyCart" class="products">
+    <div class="product" *ngFor="let product of cartItems" @fadeInOut>
+      <div class="product-img-container">
+        <img [src]="assetsBasePath + '/product-gallery-images/' + product.image" [alt]="product.name">
+      </div>
+      <div class="product-details">
+        <h5 class="product-name">{{ product.name }}</h5>
+        <p class="product-color">Color: {{ product.color }}</p>
+        <p class="product-size">Tamaño: {{ product.size }}</p>
+        <p class="product-price">{{ product.price | currency }} MXN</p>
+
+        <div class="quantity-controls">
+          <button class="quantity-control-btn" (click)="decreaseQuantity(product)" aria-label="Decrease Quantity">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <span class="quantity">{{ product.quantity }}</span>
+          <button class="quantity-control-btn" (click)="increaseQuantity(product)" aria-label="Increase Quantity">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <div class="remove-item">
+            <button class="remove-item-btn" (click)="deleteProduct(product.id)" aria-label="Remove Item">
               <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-            </button>
-            <span class="quantity">{{ product.quantity }}</span>
-            <button class="quantity-control-btn" (click)="increaseQuantity(product)">
-              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6l-2 14H7L5 6m5 0V4a2 2 0 0 1 2-2h2a 2 2 0 0 1 2 2v2"></path>
               </svg>
             </button>
           </div>
         </div>
-        <button class="remove-item-btn" (click)="deleteProduct(product.id)">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <polyline points="3 6 5 6 21 6"></polyline>
-            <path d="M19 6l-2 14H7L5 6m5 0V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
-          </svg>
-        </button>
       </div>
     </div>
   </div>
-  <div class="cart-summary">
-    <p class="total-text">Total: <span class="total-price">{{ cartTotal | currency }}</span></p>
-    <div class="cart-btns">
-      <button class="checkout-btn" (click)="goToPayment()">Go to Checkout</button>
-      <button class="clear-cart-btn" (click)="clearCart()">Clear Cart</button>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <svg
+        width="64"
+        height="64"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l1.68 7.39M5 15h14a1 1 0 0 0 .92-.62l3.54-8.5H6.53"></path>
+      </svg>
+      <p>Su carrito actualmente está vacío.</p>
+      <button class="continue-shopping-btn" (click)="closeCart()">CONTINUAR COMPRANDO</button>
+      <p>¿Ya tienes una cuenta? <a href="/login">Acceso</a> para pagar más rápido</p>
+    </div>
+  </ng-template>
+
+  <div *ngIf="cartItems.length > 0" class="cart-footer">
+    <div class="cart-summary">
+      <p class="total-text">Total:</p>
+      <span class="total-price">{{ cartTotal | currency }} MXN</span>
+    </div>
+
+    <div class="action-btns">
+      <button class="checkout-btn" (click)="goToPayment()" aria-label="Go to Checkout">Ir al Checkout</button>
+      <button class="clear-cart-btn" (click)="clearCart()" aria-label="Clear Cart">Vaciar Carrito</button>
     </div>
   </div>
 </div>
-<div class="overlay" *ngIf="isOpen" (click)="closeCart()"></div>
+<div class="overlay" *ngIf="isOpen" (click)="closeCart()" aria-hidden="true"></div>

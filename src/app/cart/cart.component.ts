@@ -1,16 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+} from '@angular/animations';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('500ms', style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class CartComponent implements OnInit {
   cartItems: any[] = [];
   cartTotal: number = 0;
   isOpen = false;
+  assetsBasePath: string = environment.assetsBasePath;
 
   constructor(private cartService: CartService, private router: Router) {}
 
@@ -63,5 +82,6 @@ export class CartComponent implements OnInit {
 
   goToPayment() {
     this.router.navigate(['/payment']);
+    this.closeCart();
   }
 }
