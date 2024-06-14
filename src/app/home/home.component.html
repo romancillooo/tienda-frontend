@@ -1,5 +1,5 @@
 <div class="brands">
-  <div class="brands-container" *ngFor="let brand of brands">
+  <div class="brands-container" *ngFor="let brand of brands; let i = index">
     <div class="brand">
       <div class="image-container">
         <img [src]="getBrandsBannerImageUrl(brand)" [alt]="brand.name">
@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="brand-products-container">
+    <div class="brand-products-container" [ngClass]="{'reverse': i % 2 !== 0}">
       <div class="image-product-brand">
         <img [src]="getBrandsImageUrl(brand)" [alt]="brand.name">
       </div>

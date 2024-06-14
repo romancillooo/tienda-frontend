@@ -21,6 +21,7 @@ import { ProductComponent } from './product/product.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass, faUser, faCartShopping, faCreditCard, faDollarSign, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     CommonModule,
     FormsModule, // Asegúrate de que FormsModule esté importado
     NgbModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule

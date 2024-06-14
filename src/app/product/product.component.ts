@@ -49,8 +49,8 @@ export class ProductComponent implements OnInit {
     this.productsService.getProductById(this.productId).subscribe((product: any) => {
       this.product = product;
       if (this.product) {
-        this.selectedColor = this.product.colors[0];
-        this.selectedSize = this.product.available_sizes[0];
+        this.selectedColor = this.product.colors[0] || {};
+        this.selectedSize = this.selectedColor.sizes ? this.selectedColor.sizes[0] : '';
         this.loadProductImages();
         if (this.product.brand_id) {
           this.brandsService.getBrandById(this.product.brand_id).subscribe(brand => this.brand = brand);
@@ -65,12 +65,13 @@ export class ProductComponent implements OnInit {
   }
 
   loadProductImages(): void {
-    this.productImages = this.selectedColor.galleryImages;
-    this.selectedImage = this.productImages[0];
+    this.productImages = this.selectedColor.galleryImages || [];
+    this.selectedImage = this.productImages[0] || '';
   }
 
   selectColor(color: any): void {
     this.selectedColor = color;
+    this.selectedSize = this.selectedColor.sizes ? this.selectedColor.sizes[0] : '';
     this.loadProductImages();
   }
 
@@ -98,7 +99,16 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(): void {
-    this.cartService.addToCart(this.product);
+    const productToCart = {
+      id: this.product.id,
+      name: this.product.name,
+      price: this.product.price,
+      color: this.selectedColor.color_name,
+      size: this.selectedSize,
+      image: this.selectedColor.galleryImages ? this.selectedColor.galleryImages[0] : '',
+      quantity: this.quantity
+    };
+    this.cartService.addToCart(productToCart);
   }
 
   addToWishlist(): void {
@@ -112,11 +122,7 @@ export class ProductComponent implements OnInit {
   }
 
   updateButtonText(): void {
-    if (this.isInWishlist) {
-      this.addToWishlistText = 'Añadido a lista de deseos!';
-    } else {
-      this.addToWishlistText = 'Añadir a lista de deseos';
-    }
+    this.addToWishlistText = this.isInWishlist ? 'Añadido a lista de deseos!' : 'Añadir a lista de deseos';
   }
 
   toggleSection(section: string): void {

@@ -6,15 +6,18 @@
   </div>
 
   <div class="product-image-main">
-    <img [src]="assetsBasePath + '/product-gallery-images/' + selectedImage" [class]="animationClass" alt="{{ product.name }}" (animationend)="onAnimationEnd()">
+    <img [src]="assetsBasePath + '/product-gallery-images/' + selectedImage" [class]="animationClass" [alt]="product.name" (animationend)="onAnimationEnd()">
   </div>
 
   <div class="product-info">
     <h1>{{ product.name }}</h1>
-    <p class="price">${{ product.price | number }}</p>
+    <p class="price">{{ product.price | currency }} MXN</p>
 
     <div class="color-options">
-      <h3>Colour: {{ selectedColor.color_name }}</h3>
+      <div class="color-text">
+        <h3>Color:</h3>
+        <p>{{ selectedColor.color_name || 'No color selected' }}</p>
+      </div>
       <div class="colors">
         <span
         *ngFor="let color of product.colors"
@@ -22,15 +25,16 @@
         [class.selected]="selectedColor === color"
         (click)="selectColor(color)"
         [style.background-color]="color.hex_code">
+          <span *ngIf="selectedColor === color" class="check-icon">✔</span>
         </span>
       </div>
     </div>
 
-    <div class="size-options">
-      <h3>Size ({{ brand.name }} Standard)</h3>
+    <div class="size-options" *ngIf="selectedColor.sizes && selectedColor.sizes.length > 0">
+      <h3>Tamaño (Oversize Fit)</h3>
       <div class="sizes">
         <span
-          *ngFor="let size of product.available_sizes"
+          *ngFor="let size of selectedColor.sizes"
           [class.selected]="size === selectedSize"
           (click)="selectSize(size)">
           {{ size }}
@@ -45,7 +49,8 @@
 
     <div class="additional-info">
       <div class="info-tab" (click)="toggleSection('description')">
-        <h3>Description <i class="fas fa-plus"></i></h3>
+        <h3>Descripción</h3>
+        <p>+</p>
       </div>
       <div class="info-content-container" [class.open]="isSectionVisible('description')">
         <div class="info-content">
