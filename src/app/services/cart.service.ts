@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { NotificationService } from './notification.service';
+import { BrandsService } from './brands.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,20 +12,36 @@ export class CartService {
   isCartOpen$ = this.isCartOpenSubject.asObservable();
   private cartTotal = new BehaviorSubject<number>(0);
 
-  constructor(private notificationService: NotificationService) {
+  constructor(
+    private notificationService: NotificationService,
+    private brandsService: BrandsService
+  ) {
     this.loadCart();
   }
 
-  private loadCart(): void {
+  private async loadCart(): Promise<void> {
     const savedCart = localStorage.getItem('cartItems');
     if (savedCart) {
       this.cartItems = JSON.parse(savedCart);
+      await this.assignBrandPaths();
       this.calculateCartTotal();
     }
   }
 
   private saveCart(): void {
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+  }
+
+  private async assignBrandPaths(): Promise<void> {
+    for (const item of this.cartItems) {
+      if (item.brand_id) {
+        const brand = await this.brandsService.getBrandById(item.brand_id).toPromise();
+        item.brandPath = this.generateBrandPath(brand.name);
+      } else {
+        console.error(`Producto con ID ${item.id} no tiene brand_id`);
+      }
+    }
+    this.saveCart();
   }
 
   toggle(): void {
@@ -35,16 +52,28 @@ export class CartService {
     this.isCartOpenSubject.next(false);
   }
 
-  addToCart(product: any): void {
+  async addToCart(product: any): Promise<void> {
+    if (!product.brand_id) {
+      console.error(`Producto con ID ${product.id} no tiene brand_id al agregar al carrito`);
+      return;
+    }
+
     const existingItemIndex = this.cartItems.findIndex(
       (item) => item.id === product.id && item.color === product.color && item.size === product.size
     );
+
     if (existingItemIndex !== -1) {
       this.cartItems[existingItemIndex].quantity++;
     } else {
+      // Verificar que el brandPath ya esté en el producto antes de hacer la solicitud HTTP
+      if (!product.brandPath) {
+        const brand = await this.brandsService.getBrandById(product.brand_id).toPromise();
+        product.brandPath = this.generateBrandPath(brand.name);
+      }
       product.quantity = 1;
       this.cartItems.push(product);
     }
+
     this.saveCart();
     this.isCartOpenSubject.next(true);
     this.calculateCartTotal();
@@ -100,5 +129,9 @@ export class CartService {
 
   getCartItems(): any[] {
     return this.cartItems;
+  }
+
+  private generateBrandPath(name: string): string {
+    return name.toLowerCase().replace(/ /g, '-');
   }
 }
