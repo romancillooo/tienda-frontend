@@ -53,7 +53,10 @@ export class ProductComponent implements OnInit {
         this.selectedSize = this.selectedColor.sizes ? this.selectedColor.sizes[0] : '';
         this.loadProductImages();
         if (this.product.brand_id) {
-          this.brandsService.getBrandById(this.product.brand_id).subscribe(brand => this.brand = brand);
+          this.brandsService.getBrandById(this.product.brand_id).subscribe(brand => {
+            this.brand = brand;
+            this.product.brandPath = this.generateBrandPath(brand.name);
+          });
         }
         if (this.product.category_id) {
           this.categoriesService.getCategoryById(this.product.category_id).subscribe(category => this.category = category);
@@ -106,7 +109,9 @@ export class ProductComponent implements OnInit {
       color: this.selectedColor.color_name,
       size: this.selectedSize,
       image: this.selectedColor.galleryImages ? this.selectedColor.galleryImages[0] : '',
-      quantity: this.quantity
+      quantity: this.quantity,
+      brand_id: this.product.brand_id,  // Asegúrate de que el brand_id se pase aquí
+      brandPath: this.product.brandPath // Asegúrate de que el brandPath se pase aquí
     };
     this.cartService.addToCart(productToCart);
   }
@@ -135,5 +140,9 @@ export class ProductComponent implements OnInit {
 
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  private generateBrandPath(name: string): string {
+    return name.toLowerCase().replace(/ /g, '-');
   }
 }

@@ -24,7 +24,7 @@
 
   <div *ngIf="cartItems.length > 0; else emptyCart" class="products">
     <div class="product" *ngFor="let product of cartItems" @fadeInOut>
-      <div class="product-img-container">
+      <div class="product-img-container" (click)="navigateToProduct(product.brandPath, product.id)">
         <img [src]="assetsBasePath + '/product-gallery-images/' + product.image" [alt]="product.name">
       </div>
       <div class="product-details">

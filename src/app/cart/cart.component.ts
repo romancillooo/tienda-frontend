@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
-import {
-  trigger,
-  transition,
-  style,
-  animate,
-} from '@angular/animations';
+import { BrandsService } from '../services/brands.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -31,7 +27,11 @@ export class CartComponent implements OnInit {
   isOpen = false;
   assetsBasePath: string = environment.assetsBasePath;
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(
+    private cartService: CartService,
+    private brandsService: BrandsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.cartService.isCartOpen$.subscribe((isOpen) => {
@@ -46,8 +46,16 @@ export class CartComponent implements OnInit {
     });
   }
 
-  getCartItems(): void {
+  async getCartItems(): Promise<void> {
     this.cartItems = this.cartService.getCartItems();
+    for (const product of this.cartItems) {
+      if (!product.brandPath && product.brand_id) {
+        const brand = await this.brandsService.getBrandById(product.brand_id).toPromise();
+        product.brandPath = this.generateBrandPath(brand.name);
+      } else if (!product.brand_id) {
+        console.error(`Producto con ID ${product.id} no tiene brand_id`);
+      }
+    }
   }
 
   clearCart(): void {
@@ -83,5 +91,21 @@ export class CartComponent implements OnInit {
   goToPayment() {
     this.router.navigate(['/payment']);
     this.closeCart();
+  }
+
+  navigateToProduct(brandPath: string, productId: number): void {
+    if (brandPath && productId) {
+      this.router.navigate([brandPath, productId]).catch(err => {
+        console.error('Navigation Error:', err);
+      });
+    } else {
+      console.error('Invalid navigation parameters:', { brandPath, productId });
+    }
+
+    this.closeCart();
+  }
+
+  private generateBrandPath(name: string): string {
+    return name.toLowerCase().replace(/ /g, '-');
   }
 }

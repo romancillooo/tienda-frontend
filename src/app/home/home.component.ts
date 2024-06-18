@@ -69,8 +69,11 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToProduct(brandPath: string, productId: number): void {
-    this.router.navigate([brandPath, productId]).catch(() => null);
+    this.router.navigate([brandPath, productId]).catch(err => {
+      console.error('Navigation Error:', err);
+    });
   }
+
 
   getBrandsBannerImageUrl(brand: any): string {
     return `${environment.assetsBasePath}/brands-banners/${brand.banner}`;
